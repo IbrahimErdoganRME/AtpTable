@@ -1,0 +1,118 @@
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+.margitBox{
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.IbrahimBox{
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+.checkbox__input {
+  display: none;
+}
+
+.input {
+  display: none;
+}
+
+.input1 {
+  display: none;
+}
+
+
+.checkbox__box {
+  text-align: right;
+  width: 1.25em;
+  height: 1.25em;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.margitBox__box {
+  text-align: right;
+  width: 1.25em;
+  height: 1.25em;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.IbrahimBox__box {
+  text-align: right;
+  width: 1.25em;
+  height: 1.25em;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.checkbox__box::after {
+  content: '\2714';
+  color: #fff;
+  transform: scale(0);
+  transition: transform 0.15s;
+}
+ .margitBox__box::after {
+   content: '\2714';
+   color: #fff;
+   transform: scale(0);
+   transition: transform 0.15s;
+ }
+
+ .IbrahimBox__box::after {
+   content: '\2714';
+   color: #fff;
+   transform: scale(0);
+   transition: transform 0.15s;
+ }
+
+.checkbox__input:checked + .checkbox__box {
+    background: #2266dc;
+    border-color: #2266dc;
+}
+
+.input:checked + .margitBox__box {
+  background: #dc22d9;
+  border-color: #dc22d9;
+}
+
+.input1:checked + .IbrahimBox__box {
+  background: #07c1f5;
+  border-color: #07c1f5;
+}
+
+.checkbox__input:checked + .checkbox__box::after{
+  transform: scale(1);
+}
+.input:checked + .margitBox__box::after {
+  transform: scale(1);
+}
+
+.input1:checked + .IbrahimBox__box::after {
+  transform: scale(1);
+}
