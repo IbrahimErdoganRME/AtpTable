@@ -1,122 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head>
-    <title>RmeAtpTable</title>
-    <meta name="viewport" content="width=device-width, inital-scale=1.0">
-    <meta charset="utf-8">
-		<meta http-equiv="Refresh" content="10">
-    <link rel="stylesheet" type="text/css" href="rme.css">
-    <link rel="stylesheet" href="/assets/dcode.css">
-    <link rel= "shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+<title>Save state of checkbox on refresh using JavaScript</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/custom.css" rel="stylesheet" />
+<style type="text/css">
+</style>
+</head>
+<body>
+<div class="wrapper">
 
-	</head>
-		<body>
+
+<ul class="list-group">
+      <li class="list-group-item"><input type="checkbox" class="save-cb-state" name="mycheckbox" value="yes"> Alex is working on the table.</li>
+      <li class="list-group-item"><input type="checkbox" class="save-cb-state" name="mycheckbox3" value="yes"> Margit is working on the table.</li>
+      <li class="list-group-item"><input type="checkbox" class="save-cb-state" name="mycheckbox2" value="yes"> Ibrahim is working on the table.</li>
+    </ul>
+</div>
 
 
-<label class="checkbox" for="@item.001">
-			<input class="checkbox__input" id="@item.001" name="001" type="checkbox" onclick="save(this)">
-			<div class="checkbox__box">
- 		 </div>
- <div style="position:absolut; left:20%; top:50px; width:300px;">
- Someone is currently working on the table.
- </div>
-</label>
-
-<script>
-			;(function() {
-    // sua lógica aqui
-})();
-
-// ou após o HTML ser carregado sem esperar folhas de estilo, imagens, etc...
-document.addEventListener('DOMContentLoaded', function(evt) {
-    // sua lógica aqui
-}, false);
-</script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<!-- This JavaScript file is required to load the XpressDox interview as well as the code required to run it -->
 
 <script>
+// Avoid scoping issues by encapsulating code inside anonymous function
+(function() {
+  // variable to store our current state
+  var cbstate;
 
-// salvar
-function save(target) {
-    localStorage.setItem(target.id, target.checked)
-}
+  // bind to the onload event
+  window.addEventListener('load', function() {
+    // Get the current state from localstorage
+    // State is stored as a JSON string
+    cbstate = JSON.parse(localStorage['CBState'] || '{}');
 
-// função auto-executável
-;(function() {
-    // percorrer todas as chaves em localStorage
-    for (let i = 0; i < localStorage.length; i++) {
-        // testar chave
-        if ( /@item\./g.test(localStorage.key(i)) ) {
-            // buscar entrada (checkbox)
-            let checkbox = document.getElementById(localStorage.key(i))
-            if ( checkbox ) {
-                checkbox.checked = JSON.parse(localStorage.getItem(localStorage.key(i)))
-            }
-        }
+    // Loop through state array and restore checked
+    // state for matching elements
+    for(var i in cbstate) {
+      var el = document.querySelector('input[name="' + i + '"]');
+      if (el) el.checked = true;
     }
+
+    // Get all checkboxes that you want to monitor state for
+    var cb = document.getElementsByClassName('save-cb-state');
+
+    // Loop through results and ...
+    for(var i = 0; i < cb.length; i++) {
+
+      //bind click event handler
+      cb[i].addEventListener('click', function(evt) {
+        // If checkboxe is checked then save to state
+        if (this.checked) {
+          cbstate[this.name] = true;
+        }
+
+    // Else remove from state
+        else if (cbstate[this.name]) {
+          delete cbstate[this.name];
+        }
+
+    // Persist state
+        localStorage.CBState = JSON.stringify(cbstate);
+      });
+    }
+  });
 })();
-
 </script>
-		<body>
-
-			<!-- IDEA:
-						<div>
-
-			    <label class="checkbox" for="AlexId">
-			        <input class="checkbox__input" type="checkbox" name="myCheckboxName" id="AlexId" onclick="save(this)">
-			        <div class="checkbox__box">
-			        </div>
-			<div style="position:absolut; left:20%; top:50px; width:300px;">
-			  Alex is currently working on the table.
-			</div>
-			</label>
-
-			<script>
-			function App() {}
-
-			App.prototype.setState = function(state) {
-			localStorage.setItem('checked', state);
-			}
-
-			App.prototype.getState = function() {
-			return localStorage.getItem('checked');
-			}
-
-			function init() {
-			var app = new App();
-			var state = app.getState();
-			var checkbox = document.querySelector('#AlexId');
-
-			if (state == 'true') {
-			  checkbox.checked = true;
-			}
-
-			checkbox.addEventListener('click', function() {
-			    app.setState(checkbox.checked);
-			});
-			}
-
-			init();
-			</script>
-
-			<label class="margitBox" for"margitID">
-			  <input class="input" type="checkbox" name="margitCheckbox" id="margitID" onclick="save(this)">
-			  <div class="margitBox__box">
-			  </div>
-			  <div style="position:absolut; left:20%; top:50px; width:300px;">
-			    Margit is currently working on the table.
-			  </div>
-			</label>
-
-			<script>
-
-			</script>
-
-			<label class="IbrahimBox" for"IbrahimID">
-			  <input class="input1" type="checkbox" name="IbrahimCheckbox" id="IbrahimID">
-			  <div class="IbrahimBox__box">
-			  </div>
-			  <div style="position:absolut; left:20%; top:50px; width:300px;">
-			    Ibrahim is currently working on the table.
-			  </div>
-			</label>
- -->
+</body>
+</html>
