@@ -4,38 +4,119 @@
     <title>RmeAtpTable</title>
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
     <meta charset="utf-8">
+		<meta http-equiv="Refresh" content="60">
     <link rel="stylesheet" type="text/css" href="rme.css">
     <link rel="stylesheet" href="/assets/dcode.css">
     <link rel= "shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	</head>
-
 		<body>
-      <label class="checkbox" for="myCheckboxId">
-        <input class="checkbox__input" type="checkbox" name="myCheckboxName" id="myCheckboxId">
-        <div class="checkbox__box">
-        </div>
-<div style="position:absolut; left:20%; top:50px; width:300px;">
-  Alex is currently working on the table.
-</div>
+
+
+<label class="checkbox" for="@item.001">
+			<input class="checkbox__input" id="@item.001" name="001" type="checkbox" onclick="save(this)">
+			<div class="checkbox__box">
+ 		 </div>
+ <div style="position:absolut; left:20%; top:50px; width:300px;">
+ Someone is currently working on the table.
+ </div>
 </label>
 
-<label class="margitBox" for"margitID">
-  <input class="input" type="checkbox" name="margitCheckbox" id="margitID">
-  <div class="margitBox__box">
-  </div>
-  <div style="position:absolut; left:20%; top:50px; width:300px;">
-    Margit is currently working on the table.
-  </div>
-</label>
+<script>
+			;(function() {
+    // sua lógica aqui
+})();
 
-<label class="IbrahimBox" for"IbrahimID">
-  <input class="input1" type="checkbox" name="IbrahimCheckbox" id="IbrahimID">
-  <div class="IbrahimBox__box">
-  </div>
-  <div style="position:absolut; left:20%; top:50px; width:300px;">
-    Ibrahim is currently working on the table.
-  </div>
-</label>
+// ou após o HTML ser carregado sem esperar folhas de estilo, imagens, etc...
+document.addEventListener('DOMContentLoaded', function(evt) {
+    // sua lógica aqui
+}, false);
+</script>
 
+<script>
+
+// salvar
+function save(target) {
+    localStorage.setItem(target.id, target.checked)
+}
+
+// função auto-executável
+;(function() {
+    // percorrer todas as chaves em localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+        // testar chave
+        if ( /@item\./g.test(localStorage.key(i)) ) {
+            // buscar entrada (checkbox)
+            let checkbox = document.getElementById(localStorage.key(i))
+            if ( checkbox ) {
+                checkbox.checked = JSON.parse(localStorage.getItem(localStorage.key(i)))
+            }
+        }
+    }
+})();
+
+</script>
 		<body>
+
+			<!-- IDEA:
+						<div>
+
+			    <label class="checkbox" for="AlexId">
+			        <input class="checkbox__input" type="checkbox" name="myCheckboxName" id="AlexId" onclick="save(this)">
+			        <div class="checkbox__box">
+			        </div>
+			<div style="position:absolut; left:20%; top:50px; width:300px;">
+			  Alex is currently working on the table.
+			</div>
+			</label>
+
+			<script>
+			function App() {}
+
+			App.prototype.setState = function(state) {
+			localStorage.setItem('checked', state);
+			}
+
+			App.prototype.getState = function() {
+			return localStorage.getItem('checked');
+			}
+
+			function init() {
+			var app = new App();
+			var state = app.getState();
+			var checkbox = document.querySelector('#AlexId');
+
+			if (state == 'true') {
+			  checkbox.checked = true;
+			}
+
+			checkbox.addEventListener('click', function() {
+			    app.setState(checkbox.checked);
+			});
+			}
+
+			init();
+			</script>
+
+			<label class="margitBox" for"margitID">
+			  <input class="input" type="checkbox" name="margitCheckbox" id="margitID" onclick="save(this)">
+			  <div class="margitBox__box">
+			  </div>
+			  <div style="position:absolut; left:20%; top:50px; width:300px;">
+			    Margit is currently working on the table.
+			  </div>
+			</label>
+
+			<script>
+
+			</script>
+
+			<label class="IbrahimBox" for"IbrahimID">
+			  <input class="input1" type="checkbox" name="IbrahimCheckbox" id="IbrahimID">
+			  <div class="IbrahimBox__box">
+			  </div>
+			  <div style="position:absolut; left:20%; top:50px; width:300px;">
+			    Ibrahim is currently working on the table.
+			  </div>
+			</label>
+ -->
